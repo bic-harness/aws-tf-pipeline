@@ -21,7 +21,7 @@ podTemplate(cloud: "kubernetes", containers: [
             //Checkout code from GitHub
             stage ('Checkout') {
                 try {
-                    git credentialsId: 'github-key', branch: "$BRANCH_NAME", url: "git@github.com:bicharness/aws-tf-pipeline.git"
+                    git credentialsId: 'github-key', branch: "$BRANCH_NAME", url: "git@github.com:bic-harness/aws-tf-pipeline.git"
                 }
                 catch (exc) {
                     println "Failed the Git Checkout - ${currentBuild.fullDisplayName}"
