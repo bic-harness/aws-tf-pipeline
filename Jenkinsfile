@@ -7,7 +7,7 @@ podTemplate(cloud: "kubernetes", containers: [
 ]) {
     node(POD_LABEL) {
         //Vault Configuration
-        def configuration = [vaultUrl: 'http://10.100.36.190:8200',
+        def configuration = [vaultUrl: 'http://10.97.106.199:8200',
                             vaultCredentialId: 'vault-token', engineVersion: 1]
         //Define Required Secrets and Env Variables
         def secrets = [
@@ -21,7 +21,7 @@ podTemplate(cloud: "kubernetes", containers: [
             //Checkout code from GitHub
             stage ('Checkout') {
                 try {
-                    git credentialsId: 'github-key', branch: "$BRANCH_NAME", url: "git@github.com:bicatana/aws-tf-pipeline.git"
+                    git credentialsId: 'github-key', branch: "$BRANCH_NAME", url: "git@github.com:bicharness/aws-tf-pipeline.git"
                 }
                 catch (exc) {
                     println "Failed the Git Checkout - ${currentBuild.fullDisplayName}"
@@ -87,7 +87,7 @@ podTemplate(cloud: "kubernetes", containers: [
                         set +x
                         echo '$DOCKER_CONFIG_FILE' > config.json
                         cp config.json /kaniko/.docker/config.json
-                        /kaniko/executor --dockerfile=$WORKSPACE/Dockerfile --context=$WORKSPACE  --destination=bicatana/k8s:tf --skip-tls-verify
+                        /kaniko/executor --dockerfile=$WORKSPACE/Dockerfile --context=$WORKSPACE  --destination=bicharness/k8s:tf --skip-tls-verify
                         """                  
                     }
                     catch (exc) {
